@@ -3,50 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ammar Mushtaq - Premium Products & Professional Services">
+    <meta name="keywords" content="e-commerce, products, services, ammar mushtaq">
+    <meta name="author" content="Ammar Mushtaq">
+    <meta property="og:title" content="Ammar Mushtaq - Premium Products & Services">
+    <meta property="og:description" content="Shop premium products and professional services">
+    <meta property="og:type" content="website">
     <title>Ammar Mushtaq - Premium Products & Services</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23667eea'>A</text></svg>">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Ammar Mushtaq</div>
+            <div class="logo">
+                <span class="logo-icon">💼</span>
+                <span class="logo-text">Ammar Mushtaq</span>
+            </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#products">Shop</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#cart" class="cart-icon">🛒 Cart <span class="cart-count">0</span></a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#products" class="nav-link">Shop</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="cart-icon" onclick="openCart(event)">
+                    <span class="cart-emoji">🛒</span>
+                    <span class="cart-count">0</span>
+                </a></li>
             </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Welcome to Ammar Mushtaq</h1>
-            <p>Premium Products & Professional Services</p>
-            <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+            <h1 class="hero-title">Welcome to Ammar Mushtaq</h1>
+            <p class="hero-subtitle">Premium Products & Professional Services</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('products')">Shop Now</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('contact')">Get In Touch</button>
+            </div>
         </div>
+        <div class="hero-background"></div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <h2>About Ammar Mushtaq</h2>
-            <p>Hi! I'm Ammar Mushtaq, dedicated to providing high-quality products and exceptional customer service. With years of experience, I've built a reputation for excellence and innovation. I'm committed to helping you find exactly what you need.</p>
-            <div class="features">
-                <div class="feature">
-                    <h3>🚚 Fast Shipping</h3>
-                    <p>Quick delivery to your doorstep</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hi! I'm Ammar Mushtaq, dedicated to providing high-quality products and exceptional customer service. With years of experience in the industry, I've built a reputation for excellence and innovation.</p>
+                    <p>I'm committed to helping you find exactly what you need, whether you're looking for premium products or professional services. Every item in my store is carefully selected to ensure quality and customer satisfaction.</p>
                 </div>
-                <div class="feature">
-                    <h3>✅ Quality Guaranteed</h3>
-                    <p>Premium products, verified quality</p>
-                </div>
-                <div class="feature">
-                    <h3>💬 24/7 Support</h3>
-                    <p>Always here to help you</p>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🚚</div>
+                        <h3>Fast Shipping</h3>
+                        <p>Quick delivery to your doorstep</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">✅</div>
+                        <h3>Quality Guaranteed</h3>
+                        <p>Premium products, verified quality</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💬</div>
+                        <h3>24/7 Support</h3>
+                        <p>Always here to help you</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Secure Payment</h3>
+                        <p>Safe and encrypted transactions</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,9 +91,27 @@
     <section id="products" class="products">
         <div class="container">
             <h2>My Products</h2>
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterProducts('all')">All Products</button>
+                <button class="filter-btn" onclick="filterProducts('electronics')">Electronics</button>
+                <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
+                <button class="filter-btn" onclick="filterProducts('services')">Services</button>
+            </div>
             <div class="product-grid" id="productGrid">
                 <!-- Products will be dynamically loaded here -->
             </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get exclusive deals and updates directly to your inbox</p>
+            <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
         </div>
     </section>
 
@@ -66,38 +119,132 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2>Get In Touch With Ammar</h2>
-            <form class="contact-form" onsubmit="handleContact(event)">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Your Email" required>
-                <textarea placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+            <div class="contact-wrapper">
+                <div class="contact-form-container">
+                    <form class="contact-form" onsubmit="handleContact(event)">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email *</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" placeholder="Tell me about your inquiry..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <h3>📍 Location</h3>
+                        <p>Available Worldwide</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>📧 Email</h3>
+                        <p>ammarmushtaq255@gmail.com</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>⏰ Response Time</h3>
+                        <p>Within 24 hours</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>🌐 Social Media</h3>
+                        <div class="social-links">
+                            <a href="#" title="Facebook">f</a>
+                            <a href="#" title="Twitter">𝕏</a>
+                            <a href="#" title="Instagram">📷</a>
+                            <a href="#" title="LinkedIn">in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeCart()">&times;</span>
-            <h2>Shopping Cart</h2>
-            <div id="cartItems" class="cart-items">
-                <!-- Cart items will appear here -->
+            <div class="modal-header">
+                <h2>🛒 Shopping Cart</h2>
+                <span class="close" onclick="closeCart()">&times;</span>
             </div>
-            <div class="cart-total">
-                <h3>Total: $<span id="cartTotal">0.00</span></h3>
+            <div class="modal-body">
+                <div id="cartItems" class="cart-items">
+                    <!-- Cart items will appear here -->
+                </div>
             </div>
-            <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+            <div class="modal-footer">
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping:</span>
+                        <span id="shipping">$0.00</span>
+                    </div>
+                    <div class="summary-row tax-row">
+                        <span>Tax (10%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total:</span>
+                        <span id="cartTotal">$0.00</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-full" onclick="checkout()">Proceed to Checkout</button>
+                <button class="btn btn-secondary btn-full" onclick="closeCart()">Continue Shopping</button>
+            </div>
         </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Ammar Mushtaq. All rights reserved.</p>
-            <div class="social-links">
-                <a href="#">Facebook</a>
-                <a href="#">Twitter</a>
-                <a href="#">Instagram</a>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Policies</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ammar Mushtaq. All rights reserved.</p>
+                <p>Designed with ❤️ for excellence</p>
             </div>
         </div>
     </footer>
